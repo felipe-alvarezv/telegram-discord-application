@@ -6,7 +6,7 @@ This application requires Telethon and Discord Webhook. You must also create a T
 
 Python Libraries:
 Telethon - https://pypi.org/project/Telethon/<br>
-Discord Webhook - https://pypi.org/project/discord-webhook/
+Discord Webhook - https://pypi.org/project/discord-webhook/<br>
 
 Telegram Application Information:
 https://core.telegram.org/api/obtaining_api_id
@@ -20,8 +20,8 @@ Telegram Application Credentials:
 Once the script is executed for the first time, it will create 'config.json'. In this file, you must specify the details of the Telegram application you created.
 
 Discord Webhook:
-After the previous step, a Discord Webhook must created. The article below contains information regarding the creation of a webhook.
-Discord Webhook Creation - https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks
+After the previous step, a Discord Webhook must created. The article below contains information regarding the creation of a webhook.<br>
+Discord Webhook Creation - https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks<br>
 
 After the webhook has been created, proceed to specify the link in the 'config.json' file.
 
