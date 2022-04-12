@@ -1,5 +1,5 @@
 # telegram-discord-integration
-An integration that will send messages from selected channels in Telegram to a Discord webhook.
+An application that will send messages from selected channels in Telegram to a Discord webhook.
 
 <b>Requirements</b><br>
 This application requires Telethon and Discord Webhook. You must also create a Telegram application on their website. 
