@@ -5,7 +5,7 @@ Requirements
 This application requires Telethon and Discord Webhook. You must also create a Telegram application on their website. 
 
 Python Libraries:
-Telethon - https://pypi.org/project/Telethon/
+Telethon - https://pypi.org/project/Telethon/<br>
 Discord Webhook - https://pypi.org/project/discord-webhook/
 
 Telegram Application Information:
