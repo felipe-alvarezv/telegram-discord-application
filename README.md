@@ -15,7 +15,7 @@ How does it work?<br>
 This application uses Telethon to fetch the messages being sent on the Telegram channels specified in the configuration file, afterwards sending them to the specified webhook. The Telegram application settings and channels can be configured in the files which will be created after its execution.
 
 How to configure it?<br>
-Telegram Application Credentials:
+Telegram Application Credentials:<br>
 Once the script is executed for the first time, it will create 'config.json'. In this file, you must specify the details of the Telegram application you created.
 
 Discord Webhook:<br>
