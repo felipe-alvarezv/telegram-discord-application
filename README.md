@@ -30,5 +30,5 @@ After entering the correct credentials, the script must be executed a second tim
 
 How to get the Telegram channel ID?<b>
   
-<b>Bugs/Issues</b>
+<b>Bugs/Issues</b><br>
 If any issues are found it would be appreciated if they are reported, thank you.<br>
