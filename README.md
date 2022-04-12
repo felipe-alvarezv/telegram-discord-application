@@ -6,9 +6,9 @@ This application requires Telethon and Discord Webhook. You must also create a T
 
 Python Libraries:
 Telethon - https://pypi.org/project/Telethon/<br>
-Discord Webhook - https://pypi.org/project/discord-webhook/<br>
+Discord Webhook - https://pypi.org/project/discord-webhook/
 
-Telegram Application Information:
+Telegram Application Information:<br>
 https://core.telegram.org/api/obtaining_api_id
 
 How does it work?
