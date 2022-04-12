@@ -12,7 +12,8 @@ Telegram Application Information:<br>
 https://core.telegram.org/api/obtaining_api_id
 
 <b>How does it work?</b><br>
-This application uses Telethon to fetch the messages being sent on the Telegram channels specified in the configuration file, afterwards sending them to the specified webhook. The Telegram application settings and channels can be configured in the files which will be created after its execution.
+This application uses Telethon to fetch the messages being sent on the Telegram channels specified in the configuration file, afterwards sending them to the specified webhook. The Telegram application settings and channels can be configured in the files which will be created after its execution.<br>
+As of right now this application only supports text messages, soon I will work on media such as images and videos.
 
 <b>How to configure it?</b><br>
 Telegram Application Credentials:<br>
