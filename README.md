@@ -29,7 +29,11 @@ After the webhook has been created, proceed to specify the link in the 'config.j
 Channel IDs:<br>
 After entering the correct credentials, the script must be executed a second time to create 'channels.json'. This file will contain the names and IDs of the channels separated by a delimeter. The name is irrelevant, but the channel's ID must be valid.
 
-<b>How to get the Telegram channel ID?</b>
+<b>How to get the Telegram channel ID?</b><br>
+Coming soon...
+
+<b>Video Tutorial:</b>
+Coming soon...
   
 <b>Bugs/Issues</b><br>
 If any issues are found it would be appreciated if they are reported, thank you.<br>
