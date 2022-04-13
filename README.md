@@ -32,7 +32,7 @@ After entering the correct credentials, the script must be executed a second tim
 <b>How to get the Telegram channel ID?</b><br>
 Coming soon...
 
-<b>Video Tutorial:</b>
+<b>Video Tutorial:</b><br>
 Coming soon...
   
 <b>Bugs/Issues</b><br>
