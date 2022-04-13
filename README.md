@@ -34,6 +34,9 @@ Coming soon...
 
 <b>Video Tutorial:</b><br>
 Coming soon...
+
+<b>Coming Features:</b><br>
+- Addition of multiple Discord webhooks to send messages to more than one channel.
   
 <b>Bugs/Issues</b><br>
 If any issues are found it would be appreciated if they are reported, thank you.<br>
