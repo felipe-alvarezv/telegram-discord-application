@@ -60,7 +60,7 @@ def load_channels_file():
         for channel in channels_data:
             # Check if default settings were changed
             if channel['telegram_id'] != "CHANGEME":
-                channels_list.append(channel['telegram_id'])
+                channels_list.append(int(channel['telegram_id']))
             else:
                 print("[ERROR] The default values in 'channels.json' must be changed.")
                 exit()
@@ -81,7 +81,7 @@ def load_channels_file():
 
 def get_telegram_message(telegram_client, channels_list, discord_webhook):
     # Telegram Event Handler - NewMessage
-    @telegram_client.on(events.NewMessage([channels_list]))
+    @telegram_client.on(events.NewMessage(chats=channels_list))
     async def telegram_message_received(event):
         # Send a message to console about a new message
         sender = await event.get_sender()
