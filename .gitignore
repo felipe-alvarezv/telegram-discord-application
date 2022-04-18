@@ -1,3 +1,9 @@
 .DS_Store
 .ssh/
 *.pub
+*.json
+venv/
+*.session
+*.session-journal
+.idea/
+.github/
