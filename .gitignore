@@ -7,4 +7,3 @@ venv/
 *.session-journal
 .idea/
 .github/
-.gitignore
