@@ -6,5 +6,4 @@ venv/
 *.session
 *.session-journal
 .idea/
-.github/
 .idea/
