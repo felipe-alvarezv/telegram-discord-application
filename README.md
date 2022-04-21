@@ -1,4 +1,4 @@
-# telegram-discord-integration
+# telegram-discord-application
 An application which sends messages from Telegram to Discord.
 
 <b>Requirements</b><br>
@@ -12,7 +12,7 @@ Telegram Application Information:<br>
 https://core.telegram.org/api/obtaining_api_id
 
 <b>How does it work?</b><br>
-This application uses Telethon to fetch the messages being sent on the Telegram channels specified in the configuration file, afterwards sending them to the specified Discord channel webhook. The Telegram application settings and channels, along with the Discord channel webhooks can be configured in the files which will be created after the program's execution.<br><br>
+This application uses Telethon to fetch the messages being sent on the Telegram channels specified in the configuration file, afterwards sending them to the specified Discord channel webhook. The Telegram application settings and channels, along with the Discord channel webhooks can be configured in the files which will be created after the program's execution.<br>
 
 <b>Note:</b> As of right now this application only supports text messages, soon I will work on media such as images and videos.
 
