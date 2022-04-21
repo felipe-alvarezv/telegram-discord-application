@@ -1,4 +1,4 @@
-# telegram-discord-application
+# telegram-to-discord-application
 An application which sends messages from Telegram to Discord.
 
 <b>Requirements</b><br>
@@ -38,9 +38,10 @@ Coming soon...
 
 <b>Recently Added:<b><br>
 - Addition of multiple Discord webhooks to send messages to more than one channel.
+- Creation of all '.json' files after first execution.
 
 <b>Coming Features:</b><br>
-- Creation of all '.json' files after first execution.
+- Check to see if Telegram client successfully connected or exit session.
 
 <b>Bugs/Issues</b><br>
 If any issues are found it would be appreciated if they are reported, thank you.<br>

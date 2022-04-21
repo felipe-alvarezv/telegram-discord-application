@@ -16,7 +16,7 @@ def load_configuration_file():
             # Initialization of TelegramClient
             return TelegramClient(phone_number, api_id, api_hash)
         else:
-            print("[ERROR] The default values in 'config.json' must be changed.")
+            print("[TDA] ERROR: The default values in 'config.json' must be changed.")
             exit()
     # If the configuration file is not found, create a new one with default values
     except FileNotFoundError:
@@ -27,8 +27,7 @@ def load_configuration_file():
         }
         with open('config.json', 'w') as outfile:
             json.dump(config, outfile)
-        print("[ERROR] 'config.json' was not found, a new file has been created. Please re-start the program.")
-        exit()
+        print("[TDA] ERROR: 'config.json' was not found, a new file has been created.")
 
 def load_channels_file():
     # Load the Telegram channels from file
@@ -42,7 +41,7 @@ def load_channels_file():
             if channel['telegram_id'] != "CHANGEME":
                 channel_list.append(int(channel['telegram_id']))
             else:
-                print("[ERROR] The default values in 'channels.json' must be changed.")
+                print("[TDA] ERROR: The default values in 'channels.json' must be changed.")
                 exit()
 
         return channel_list
@@ -55,8 +54,7 @@ def load_channels_file():
         }]
         with open('channels.json', 'w') as outfile:
             json.dump(channel_list, outfile)
-        print("[ERROR] 'channels.json' was not found, a new file has been created. Please re-start the program.")
-        exit()
+        print("[TDA] ERROR: 'channels.json' was not found, a new file has been created.")
 
 def load_webhooks_file():
     # Load the configuration file with the specified Discord webhooks
@@ -70,7 +68,7 @@ def load_webhooks_file():
             if webhook['webhook_url'] != "CHANGEME":
                 webhook_list.append(webhook['webhook_url'])
             else:
-                print("[ERROR] The default values in 'webhooks.json' must be changed.")
+                print("[TDA] ERROR: The default values in 'webhooks.json' must be changed.")
                 exit()
 
         return webhook_list
@@ -83,5 +81,4 @@ def load_webhooks_file():
         }]
         with open('webhooks.json', 'w') as outfile:
             json.dump(webhook_list, outfile)
-        print("[ERROR] 'webhooks.json' was not found, a new file has been created. Please re-start the program.")
-        exit()
+        print("[TDA] ERROR: 'webhooks.json' was not found, a new file has been created.")

@@ -9,14 +9,19 @@ def main():
     channel_list = load_channels_file()
     webhook_list = load_webhooks_file()
 
-    # Send a message to console about bot status
-    print("[TDA] The application has been initialized.")
+    # Check that channel_list and webhook_list are not empty
+    if channel_list and webhook_list:
+        # Send a message to console about bot status
+        print("[TDA] The application has been initialized.")
 
-    get_telegram_message(telegram_client, channel_list, webhook_list)
+        get_telegram_message(telegram_client, channel_list, webhook_list)
 
-    # Start the TelegramClient and run on loop
-    telegram_client.start()
-    telegram_client.run_until_disconnected()
+        # Start the TelegramClient and run on loop
+        telegram_client.start()
+        telegram_client.run_until_disconnected()
+    else:
+        print("[TDA] The missing configuration files have been created, the application must be re-started.")
+        exit()
 
 def get_telegram_message(telegram_client, channel_list, webhook_list):
     # Telegram Event Handler - NewMessage
