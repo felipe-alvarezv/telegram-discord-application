@@ -17,21 +17,23 @@ This application uses Telethon to fetch the messages being sent on the Telegram 
 <b>Note:</b> As of right now this application only supports text messages, soon I will work on media such as images and videos.
 
 <b>How to configure it?</b><br>
+First, the script must be executed in order to create all the necessary configuration files. These files will include 'config.json', 'channels.json' and 'webhooks.json'. These files must be altered and configured correctly for this application to work as intended.
+
 Telegram Application Credentials:<br>
-Once the script is executed for the first time, it will create 'config.json'. In this file, you must specify the details of the Telegram application you created.
+After the creation of 'config.json', you must specify the details of Telegram application that are provided on their website in this file.
 
 Channel IDs:<br>
-After entering the correct credentials, the script must be executed a second time to create 'channels.json'. This file will contain the names and IDs of the channels separated by a delimiter. The name is irrelevant, but the channel's ID must be valid.
+The 'channels.json' file will contain the information of the Telegram channels that you want to get the messages from. In this file you will need to specify their name and ID.
+
+<b>Note:</b> The channel ID must be valid or no messages will be detected.
 
 To get the IDs of the Telegram channels you can run 'get_channels.py' which was designed as a standalone program just for this purpose. This program will list all of the channels along with their names and IDs.
 
 Discord Webhooks:<br>
-The script must be executed for a third time in order to create 'webhooks.json', which will be required to specify the Discord channel webhooks.
-
-After the previous steps, a Discord Webhook must created. The article below contains information regarding the creation of a webhook.<br>
+The 'webhooks.json' file will contain all the Discord webhooks which will be used to send the messages. The article below contains information regarding the creation of a webhook.<br>
 Discord Webhook Creation - https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks<br>
 
-After the webhook has been created, proceed to specify the name and link in the 'webhooks.json' file.
+After the webhook has been created, proceed to specify the name and URL in the 'webhooks.json' file.
 
 <b>Video Tutorial:</b><br>
 Coming soon...
@@ -41,6 +43,8 @@ Coming soon...
 - Creation of all '.json' files after first execution.
 
 <b>Coming Features:</b><br>
+- Potential convertion from JSON to SQLite.
+- Choose a channel to send a message to specific webhook.
 - Check to see if Telegram client successfully connected or exit session.
 
 <b>Bugs/Issues</b><br>
