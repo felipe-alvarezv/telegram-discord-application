@@ -5,6 +5,36 @@ from Channel import Channel
 from telethon import events, TelegramClient
 from discord_webhook import DiscordWebhook
 import os
+import PySimpleGUI as sg
+
+def show_main_gui():
+    # ---- GUI Defination ---- #
+    layout = [
+        [sg.Text("Created by Felipe Alvarez")],
+        [sg.Button("1. Channel Management")],
+        [sg.Text("OR")],
+        [sg.Button("2. Start Application")]
+    ]
+
+    return sg.Window("Telegram to Discord Application", layout)
+
+def show_channel_gui():
+    channel_layout = [
+        [sg.Listbox(values=['Test', 'Test 2'], select_mode='extended', key='fac', size=(30, 6))],
+        [sg.Button("Add"), sg.Button("Modify"), sg.Button("Delete")],
+    ]
+    return sg.Window("Channel List", channel_layout)
+
+def add_channel_gui():
+    add_channel_layout = [
+        [sg.Text("Select a channel:")],
+        [sg.Listbox(values=["Bruh"], select_mode="extended", key="channel_selection", size=(30, 6))],
+
+        [sg.Text("Webhooks: ")],
+        [sg.Input("")],
+        [sg.Button("Submit")],
+    ]
+    return sg.Window("Add Channel", add_channel_layout)
 
 def main():
     # Initialize client with config data
@@ -16,69 +46,99 @@ def main():
 # Define all menu options that are available
 def show_menu(telegram_client):
     # Clear the screen for Windows and Linux
-    os.system('cls||clear')
+    #os.system('cls||clear')
 
     # Send creator message and available options
-    print("Telegram to Discord Application\n- Created by Felipe Alvarez -\n")
-    print("1. Channel Menu\n2. Start Application\n")
+    #print("Telegram to Discord Application\n- Created by Felipe Alvarez -\n")
+    #print("1. Channel Menu\n2. Start Application\n")
 
     # Ask user for their menu input option
-    main_menu = int(input("Enter a number: "))
+    #main_menu = int(input("Enter a number: "))
 
     # If the user chose the first option
-    if main_menu == 1:
+    #if main_menu == 1:
         # Show menu options regarding specific channels
-        show_channel_menu(telegram_client)
+    #    show_channel_menu(telegram_client)
     # If the user chose the second option
-    elif main_menu == 2:
+    #elif main_menu == 2:
         # Call function that begins listening to pre-existing channels and their webhooks
-        listen(telegram_client)
+    #    listen(telegram_client)
+
+    window = show_main_gui()
+
+    while True:
+        event, values = window.read()
+        if event in (sg.WINDOW_CLOSED, "Exit"):
+            break
+        if event == "1. Channel Management":
+            show_channel_window = show_channel_gui()
+
+            while True:
+                event, values = show_channel_window.read()
+                if event in (sg.WINDOW_CLOSED, "Exit"):
+                    break
+                if event == "Add":
+                    add_channel_window = add_channel_gui()
+
+                    while True:
+                        event, values = add_channel_window.read()
+                        if event in (sg.WINDOW_CLOSED, "Exit"):
+                            break
+
+                        else:
+                            sg.popup_error("Working on it")
+
+                else:
+                    sg.popup_error("Working on it")
+
+        else:
+            sg.popup_error("Working on it")
 
 # Channel options
 def show_channel_menu(telegram_client):
     os.system('cls||clear')
-    print("Telegram to Discord Application\n- Channel Menu -\n")
-    print("1. Add Channel\n2. Modify Channel Webhooks\n3. Delete Channel\n4. Back")
-    channel_menu = int(input("Enter a number: "))
+    #print("Telegram to Discord Application\n- Channel Menu -\n")
+    #print("1. Add Channel\n2. Modify Channel Webhooks\n3. Delete Channel\n4. Back")
+    #channel_menu = int(input("Enter a number: "))
 
-    if channel_menu == 1:
-        add_channel(telegram_client)
-    elif channel_menu == 2:
-        print("Second option")
-    elif channel_menu == 3:
-        print("Third option")
-    elif channel_menu == 4:
-        print("Fourth option")
+    #if channel_menu == 1:
+    #    add_channel(telegram_client)
+    #elif channel_menu == 2:
+    #    print("Second option")
+    #elif channel_menu == 3:
+    #    print("Third option")
+    #elif channel_menu == 4:
+    #    print("Fourth option")
 
 def add_channel(telegram_client):
     os.system('cls||clear')
-    channel_list = []
+    #channel_list = []
 
-    for dialog in telegram_client.iter_dialogs():
-          if dialog.is_channel:
-              channel_list.append([dialog.id * -1, dialog.title])
+    #for dialog in telegram_client.iter_dialogs():
+    #      if dialog.is_channel:
+    #          channel_list.append([dialog.id * -1, dialog.title])
 
-    if channel_list:
-        print("%-20s %-20s %-20s" % ("Index", "ID", "Title"))
-        for channel in channel_list:
-            print("%-20d %-20d %-20s" % (channel_list.index(channel), channel[0], channel[1]))
+    #if channel_list:
+    #    print("%-20s %-20s %-20s" % ("Index", "ID", "Title"))
+    #    for channel in channel_list:
+    #        print("%-20d %-20d %-20s" % (channel_list.index(channel), channel[0], channel[1]))
 
-        channel_index = int(input("\nEnter a channel index: "))
-        if channel_index >= 0 or channel_index < len(channel_list):
-            webhook = input("Enter a webhook link: ")
-            channels_file = open('./channels.pkl', 'wb')
-            channel_object = Channel(channel_list[channel_index][0], channel_list[channel_index][1], webhook)
-            pickle.dump(channel_object, channels_file)
-            channels_file.close()
-        else:
-            print("Invalid index.")
-    else:
-        print("You must be in at least one Telegram channel.")
+    #    channel_index = int(input("\nEnter a channel index: "))
+    #    if channel_index >= 0 or channel_index < len(channel_list):
+    #        webhook = input("Enter a webhook link: ")
+    #        channels_file = open('./channels.pkl', 'wb')
+    #        channel_object = Channel(channel_list[channel_index][0], channel_list[channel_index][1], webhook)
+    #        pickle.dump(channel_object, channels_file)
+    #        channels_file.close()
+    #    else:
+    #        print("Invalid index.")
+    #else:
+    #    print("You must be in at least one Telegram channel.")
 
 def add_channel_webhooks():
     os.system('cls||clear')
-    print("You ")
-    print("")
+    #print("You ")
+    #print("")
 
 def initialize():
     # Load configuration files for settings
