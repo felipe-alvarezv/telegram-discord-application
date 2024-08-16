@@ -6,42 +6,75 @@ from telethon import events, TelegramClient
 from discord_webhook import DiscordWebhook
 import os
 import PySimpleGUI as sg
+import tkinter as tk
 
-def show_main_gui():
-    # ---- GUI Defination ---- #
-    layout = [
-        [sg.Text("Created by Felipe Alvarez")],
-        [sg.Button("1. Channel Management")],
-        [sg.Text("OR")],
-        [sg.Button("2. Start Application")]
-    ]
+#Main Page
+def main_page_click(root, frame):    
+    frame.destroy()
+    frame = tk.Frame(root)
+    frame.grid(row=0, column=0)
 
-    return sg.Window("Telegram to Discord Application", layout)
+    info_btn = tk.Button(frame, text="Information", command=lambda: info_btn_click(root, frame))
+    info_btn.grid(row=0, column=0)
 
-def show_channel_gui():
-    channel_layout = [
-        [sg.Listbox(values=['Test', 'Test 2'], select_mode='extended', key='fac', size=(30, 6))],
-        [sg.Button("Add"), sg.Button("Modify"), sg.Button("Delete")],
-    ]
-    return sg.Window("Channel List", channel_layout)
+    channel_btn = tk.Button(frame, text="Channel Management", command=lambda: channel_btn_click(root, frame))
+    channel_btn.grid(row=0, column=1)
 
-def add_channel_gui():
-    add_channel_layout = [
-        [sg.Text("Select a channel:")],
-        [sg.Listbox(values=["Bruh"], select_mode="extended", key="channel_selection", size=(30, 6))],
+    application_btn = tk.Button(frame, text="Start Application", command=lambda: application_btn_click(root, frame))
+    application_btn.grid(row=0, column=2)
 
-        [sg.Text("Webhooks: ")],
-        [sg.Input("")],
-        [sg.Button("Submit")],
-    ]
-    return sg.Window("Add Channel", add_channel_layout)
+#Channel Management Page
 
-def main():
+
+#Information Page
+def info_btn_click(root, frame):
+    frame.destroy()
+    frame = tk.Frame(root)
+    frame.grid(row=0, column=0)
+
+    info_label = tk.Label(frame, text="The purpose of this application is to foward messages from a Telegram channel to a Discord webhook.\nMedia is not currently supported.")
+    info_label.grid(row=0, column=0)
+    
+    author_label = tk.Label(frame, text="Made by Felipe Alvarez")
+    author_label.grid(row=1, column=0)
+
+    return_button = tk.Button(frame, text="Main Page", command=lambda: main_page_click(root, frame))
+    return_button.grid(row=2, column=0)
+
+#Application Page
+def application_btn_click(root, frame):
+    frame.destroy()
+    frame = tk.Frame(root)
+    frame.grid(row=0, column=0)
+
+    root.destroy()
+
     # Initialize client with config data
     telegram_client = initialize()
+    listen(telegram_client)
+
+
+
+    
+
+
+
+def main():
+    root = tk.Tk()
+    root.title("Telegram to Discord App")
+
+    frame = tk.Frame(root)
+    frame.grid(row=0, column=0)
+
+    main_page_click(root, frame)
+    root.mainloop()
+
+
+    # Initialize client with config data
+    #telegram_client = initialize()
 
     # Show the text menu options for the program
-    show_menu(telegram_client)
+    #show_menu(telegram_client)
 
 # Define all menu options that are available
 def show_menu(telegram_client):
@@ -184,7 +217,6 @@ def get_telegram_message(telegram_client, channels_data):
                     if webhook:
                         webhook_payload = DiscordWebhook(url=webhook, content=message)
                         response = webhook_payload.execute()
-
 
 if __name__ == '__main__':
     main()
