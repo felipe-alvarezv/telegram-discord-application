@@ -1,11 +1,9 @@
-import pickle
 from load_configurations import load_configuration, load_channels
 import json
 from Channel import Channel
 from telethon import events, TelegramClient
 from discord_webhook import DiscordWebhook
 import os
-import PySimpleGUI as sg
 import tkinter as tk
 
 #Main Page
@@ -23,9 +21,6 @@ def main_page_click(root, frame):
     application_btn = tk.Button(frame, text="Start Application", command=lambda: application_btn_click(root, frame))
     application_btn.grid(row=0, column=2)
 
-#Channel Management Page
-
-
 #Information Page
 def info_btn_click(root, frame):
     frame.destroy()
@@ -41,6 +36,25 @@ def info_btn_click(root, frame):
     return_button = tk.Button(frame, text="Main Page", command=lambda: main_page_click(root, frame))
     return_button.grid(row=2, column=0)
 
+#Channel Management Page
+def channel_btn_click(root, frame):
+    frame.destroy()
+    frame = tk.Frame(root)
+    frame.grid(row=0, column=0)
+
+    channel_list = tk.Listbox(frame)
+    channel_list.grid(row=0, column=0)
+
+    channel_add = tk.Button(frame, text="+", command=lambda: channel_add_click(root, frame))
+    channel_add.grid(row=1, column=1)
+
+    channel_modify = tk.Button(frame, text="M")
+    channel_modify.grid(row=1, column=2)
+
+    channel_delete = tk.Button(frame, text="-")
+    channel_delete.grid(row=1, column=3)
+
+
 #Application Page
 def application_btn_click(root, frame):
     frame.destroy()
@@ -53,7 +67,29 @@ def application_btn_click(root, frame):
     telegram_client = initialize()
     listen(telegram_client)
 
+#Add Channel Page
+def channel_add_click(root, frame):
+    frame.destroy()
+    frame = tk.Frame(root)
+    frame.grid(row=0, column=0)
 
+    description_label = tk.Label(frame, text="Description:")
+    description_label.grid(row=0, column=0)
+
+    description_entry = tk.Entry(frame)
+    description_entry.grid(row=0, column=1)
+
+    channel_label = tk.Label(frame, text="Channel:")
+    channel_label.grid(row=1, column=0)
+
+    channel_id = tk.OptionMenu(frame, variable="x", value=1)
+    channel_id.grid(row=1, column=1)
+
+    discord_label = tk.Label(frame, text="Discord Webhook:")
+    discord_label.grid(row=2, column=0)
+
+    discord_webhook = tk.Entry(frame)
+    discord_webhook.grid(row=2, column=1)
 
     
 
