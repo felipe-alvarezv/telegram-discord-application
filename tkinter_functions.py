@@ -76,12 +76,12 @@ def main_page_click(root):
         channel_tree.insert('', 'end', text='1', values=channel)
 
     #Add Channel Button Widget
-    add_btn = tk.Button(manage_right_frame_bottom, text="Add Channel", command=lambda: add_channel_btn(root, telegram_client, channel_tree))
+    add_btn = tk.Button(manage_left_frame_bottom, text="Add Channel", command=lambda: add_channel_btn(root, telegram_client, channel_tree))
     add_btn.grid(row=0, column=0)
 
     #Channel Information Listbox Widget
-    channel_info_list = tk.Listbox(manage_right_frame_top, width=80, height=6)
-    channel_info_list.grid(row=0, column=0, padx=5, pady=5, sticky='n')
+    channel_info_list = tk.Listbox(manage_right_frame_top, width=80, height=12)
+    channel_info_list.grid(row=0, column=0, padx=5, pady=5)
 
     info_scroll = Scrollbar(manage_right_frame_top, orient=tk.HORIZONTAL, command=channel_info_list.xview)
     channel_info_list['xscrollcommand'] = info_scroll.set
@@ -89,7 +89,7 @@ def main_page_click(root):
 
     #Delete Channel Button Widget
     delete_btn = tk.Button(manage_right_frame_bottom, text='Delete Channel', command=lambda: delete_channel_btn(root, telegram_client, channel_tree))
-    delete_btn.grid(row=0, column=1)
+    delete_btn.grid(row=0, column=0)
 
     #Set the names of the tabs
     notebook.add(info_frame, text="Information")
@@ -185,8 +185,6 @@ def add_channel_btn_clicked(add_channel_window, channel_tree, description_entry,
         #Add all loaded Channels to Treeview
         for channel in channels:
             channel_tree.insert('', 'end', text='1', values=channel)
-
-        
 
 #Delete Channel Button Event
 def delete_channel_btn(root, telegram_client, channel_tree):
