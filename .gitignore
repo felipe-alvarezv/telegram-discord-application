@@ -7,3 +7,7 @@ venv/
 *.session-journal
 .idea/
 __pycache__/
+.venv/
+channels/
+.gitignore
+tkinter_functions copy.py
