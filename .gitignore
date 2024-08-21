@@ -1,13 +1,12 @@
-.DS_Store
 .ssh/
-*.pub
-*.json
-venv/
-*.session
-*.session-journal
 .idea/
 __pycache__/
 .venv/
-channels/
+venv/
+.DS_Store
+*.pub
+*.json
+*.pkl
+*.session
+*.session-journal
 .gitignore
-tkinter_functions copy.py

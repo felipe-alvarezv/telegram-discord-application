@@ -71,7 +71,7 @@ def main_page_click(root):
     channel_tree['yscrollcommand'] = channel_tree_scroll.set
     channel_tree_scroll.grid(row=0, column=0, sticky='ns')
 
-    #Add all loaded channels to Listbox
+    #Add all loaded channels to Treeview
     for channel in channels:
         channel_tree.insert('', 'end', text='1', values=channel)
 
