@@ -25,12 +25,15 @@ def listen(telegram_client):
 
 
 def get_telegram_message(telegram_client, channels_data):
-    channel_id_list = []
+    channel_list = []
+    channel_list_id = []
+    
     for channel in channels_data:
-        channel_id_list.append(channel.get_id())
+        channel_list.append(channel)
+        channel_list_id.append(channel.get_id())
 
     # Telegram Event Handler - NewMessage
-    @telegram_client.on(events.NewMessage(chats=channel_id_list))
+    @telegram_client.on(events.NewMessage(chats=channel_list_id))
     async def telegram_message_received(event):
         # Send a message to console about a new message
         sender = await event.get_sender()
@@ -44,8 +47,12 @@ def get_telegram_message(telegram_client, channels_data):
             # Store the event message
             message = event.text
 
-            #Send message to webhook
-            webhook = channel.get_webhook()
-            if webhook:
-                webhook_payload = DiscordWebhook(url=webhook, content=message)
-                response = webhook_payload.execute()
+            for channel in channel_list:
+                channel_id = int(str(channel.get_id())[3:])
+
+                #Send message to webhook
+                if channel_id == event.peer_id.channel_id:
+                    webhook = channel.get_webhook()
+                    if webhook:
+                        webhook_payload = DiscordWebhook(url=webhook, content=message)
+                        response = webhook_payload.execute()
