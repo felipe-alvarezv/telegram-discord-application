@@ -34,16 +34,3 @@ def load_configuration():
         with open('config.json', 'w') as outfile:
             json.dump(config_file, outfile, indent=4)
         print("[TDA] ERROR: 'config.json' was not found, a new file has been created.")
-
-#Function to load channel and store as list
-def load_channel_list():
-    channels = [] #Empty list to store channels
-    directory = './channels/' #Path to channel directory
-
-    for file in os.listdir(directory): #Search for files in specified directory
-        if file.endswith('.pkl'): #Match files that end with '.pkl'
-            with open(directory + file, 'rb') as f:
-                temp_channel = pickle.load(f)
-                channels.append([temp_channel.get_desc(), temp_channel.get_id(), temp_channel.get_webhook()])
-
-    return channels #Return a list containing channels
