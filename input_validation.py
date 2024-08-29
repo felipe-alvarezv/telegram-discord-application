@@ -1,7 +1,9 @@
 import re
+from os import listdir
+from os.path import isfile, join
 
 def is_letter(input):
-    pattern = re.compile(r"[A-za-z]+") #Regular expression that checks for letters
+    pattern = re.compile(r"[A-za-z +]+") #Regular expression that checks for letters
 
     if re.fullmatch(pattern, input):
         return True
@@ -17,3 +19,6 @@ def is_link(input):
     
     if re.fullmatch(pattern, input):
         return True
+    
+def is_directory_not_empty(path):
+    return any(isfile(join(path, i)) for i in listdir(path))

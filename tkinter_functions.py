@@ -8,7 +8,7 @@ from tkinter import messagebox
 from Channel import Channel 
 from load_functions import load_channel
 from telegram_functions import initialize, listen
-from input_validation import is_letter, is_number, is_link
+from input_validation import is_letter, is_number, is_link, is_directory_not_empty
 
 #Main Page
 def main_page_click(root):
@@ -256,6 +256,9 @@ def delete_channel_btn(channel_tree):
         messagebox.showerror('Invalid Channel', 'Please make sure to select a channel.')
 
 def start_application(root, telegram_client):
-    
-    root.destroy()
-    listen(telegram_client)
+    directory = './channels/'
+    if is_directory_not_empty(directory):
+        root.destroy()
+        listen(telegram_client)
+    else:
+        messagebox.showerror('Empty Directory', 'Make sure to at least add one channel to begin the application.')
