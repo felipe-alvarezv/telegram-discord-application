@@ -2,8 +2,8 @@ import re
 from os import listdir
 from os.path import isfile, join
 
-def is_letter(input):
-    pattern = re.compile(r"[A-za-z +]+") #Regular expression that checks for letters
+def is_alphanumerical(input):
+    pattern = re.compile(r"[A-za-z0-9 +]+") #Regular expression that checks for letters
 
     if re.fullmatch(pattern, input):
         return True

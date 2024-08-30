@@ -8,7 +8,7 @@ def main():
     root.title("Telegram to Discord App")
     root.resizable(width=False, height=False)
 
-    main_page_click(root)
+    main_page_click(root)    
     root.mainloop()
 
 if __name__ == '__main__':

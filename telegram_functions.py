@@ -1,6 +1,7 @@
 from telethon import events, TelegramClient
 from discord_webhook import DiscordWebhook
-from load_functions import load_configuration, load_channel
+from load_functions import load_configuration
+from sqlite_connection import load_channel
 
 def initialize():
     # Load configuration files for settings

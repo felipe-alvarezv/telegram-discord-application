@@ -1,14 +1,12 @@
 import os
-import pickle
 import tkinter as tk
 from tkinter import Toplevel
 from tkinter import ttk
 from tkinter import Scrollbar
 from tkinter import messagebox
-from Channel import Channel 
-from load_functions import load_channel
+from sqlite_connection import load_channel, add_channel, load_channel_info
 from telegram_functions import initialize, listen
-from input_validation import is_letter, is_number, is_link, is_directory_not_empty
+from input_validation import is_alphanumerical, is_number, is_link, is_directory_not_empty
 
 #Main Page
 def main_page_click(root):
@@ -56,13 +54,9 @@ def main_page_click(root):
     channels = load_channel() #Load channel objects
 
     #Create Treeview for channels
-    root_tree = ttk.Treeview(manage_left_frame_top, column=('c1', 'c2', 'c3'), show='headings', height=8, selectmode='browse')
+    root_tree = ttk.Treeview(manage_left_frame_top, column=('c1'), show='headings', height=8, selectmode='browse')
     root_tree.column('#1', width=200, anchor='center')
     root_tree.heading('#1', text='Description')
-    root_tree.column('#2', width=0, stretch = "no")
-    root_tree.heading('#2', text='ID')
-    root_tree.column("#3", width = 0, stretch = "no")
-    root_tree.heading('#3', text='Webhook')
     root_tree.grid(row=0, column=1, padx=5, pady=5)
     root_tree.bind('<ButtonRelease-1>', lambda event: show_channel_info(event, root_tree, root_desc, root_id, root_wh))
     root_tree.bind('<KeyRelease-Up>', lambda event: show_channel_info(event, root_tree, root_desc, root_id, root_wh))
@@ -74,7 +68,7 @@ def main_page_click(root):
 
     #Add all loaded channels to Treeview
     for channel in channels:
-        root_tree.insert('', 'end', text='1', values=[channel.get_desc(), channel.get_id(), channel.get_webhook()])
+        root_tree.insert('', 'end', text='1', values=channel)
 
     #Add Channel Button Widget
     add_btn = tk.Button(manage_left_frame_bottom, text="Add Channel", command=lambda: add_channel_btn(root, telegram_client, root_tree))
@@ -112,7 +106,7 @@ def show_channel_info(event, channel_tree, channel_desc_entry, channel_id_entry,
 
     if selection:
         #Get the selected channel
-        data = channel_tree.item(selection)['values']
+        desc = channel_tree.item(selection)['values'][0]
 
         #Enable Entry widgets for information
         channel_desc_entry.configure(state='normal')
@@ -125,9 +119,9 @@ def show_channel_info(event, channel_tree, channel_desc_entry, channel_id_entry,
         channel_wh_entry.delete(0, 'end')
 
         #Set new data
-        channel_desc_entry.insert(0, data[0])
-        channel_id_entry.insert(0, data[1])
-        channel_wh_entry.insert(0, data[2])
+        channel_desc_entry.insert(0, desc)
+        channel_id_entry.insert(0, load_channel_info(desc, 'id'))
+        channel_wh_entry.insert(0, load_channel_info(desc, 'webhook'))
 
         #Disable widgets to prevent modifying values
         channel_desc_entry.configure(state='disable')
@@ -206,12 +200,8 @@ def add_channel_btn_clicked(add_channel_window, channel_tree, description_entry,
         webhook = webhook_entry.get()
 
         if description and channel_id and webhook:
-            if is_letter(description) and is_number(channel_id) and is_link(webhook):
-                filename = 'channels/' + description_entry.get() + '.pkl'
-                channel_file = open(filename, 'wb')
-                temp_channel = Channel(description, channel_id, webhook) #Make a Channel object with the passed variable
-                pickle.dump(temp_channel, channel_file)
-                channel_file.close()
+            if is_alphanumerical(description) and is_number(channel_id) and is_link(webhook):
+                add_channel(description, channel_id, webhook)
                 add_channel_window.destroy()
 
                 channel_tree.delete(*channel_tree.get_children())  #Clear Treeview
@@ -219,15 +209,14 @@ def add_channel_btn_clicked(add_channel_window, channel_tree, description_entry,
 
                 #Add all loaded Channels to Treeview
                 for channel in channels:
-                    channel_info = [channel.get_desc(), channel.get_id(), channel.get_webhook()]
-                    new_channel = channel_tree.insert('', 'end', text='1', values=channel_info)
+                    new_channel = channel_tree.insert('', 'end', text='1', values=channel)
 
                     if channel.get_id() == selected_channel.get()[1]:
                         channel_tree.selection_set(new_channel)
             else:
-                messagebox.showerror('Invalid Field', 'Please make sure to enter valid information that meets these requirements:\n\nDescription must only be letters.\nWebhook must be a valid link.')
+                messagebox.showerror('Invalid Field', 'Please make sure to enter valid information that meets these requirements:\n\nDescription must only be alphanumerical.\nWebhook must be a valid link.')
         else:
-            messagebox.showerror('Invalid Field', 'Please make sure to enter valid information that meets these requirements:\n\nDescription must only be letters.\nWebhook must be a valid link.')
+            messagebox.showerror('Invalid Field', 'Please make sure to enter valid information that meets these requirements:\n\nDescription must only be alphanumerical.\nWebhook must be a valid link.')
     else:
         messagebox.showerror('Invalid Field', 'Please make sure to select a channel.')
 
@@ -251,7 +240,7 @@ def delete_channel_btn(channel_tree):
 
             #Add all loaded Channels to Treeview
             for channel in channels:
-                channel_tree.insert('', 'end', text='1', values=[channel.get_desc(), channel.get_id(), channel.get_webhook()])
+                channel_tree.insert('', 'end', text='1', values=channel)
     else:
         messagebox.showerror('Invalid Channel', 'Please make sure to select a channel.')
 
