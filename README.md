@@ -23,7 +23,7 @@ The application uses Tkinter to create a user interface that can be navigated wi
 Once you start the application, navigate to the 'API Credentials' window. Once the correct credentials are provided, a session can be initiated allowing the rest of the program to become accessible. Keep in mind, at least one channel must be added in order to start listening to Telegram messages.
 
 <b>Video Tutorial:</b><br>
-Coming soon...
+https://www.youtube.com/watch?v=HlDqeVO7IPs
 
 <b>Recently Added:<b><br>
 - Complete rework of old abandoned program.
