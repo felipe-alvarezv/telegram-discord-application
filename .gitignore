@@ -2,12 +2,9 @@
 .idea/
 __pycache__/
 .venv/
-venv/
 .DS_Store
 *.pub
 *.json
-*.pkl
 *.db
 *.session
 *.session-journal
-.gitignore
