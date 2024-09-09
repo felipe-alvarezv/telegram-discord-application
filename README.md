@@ -5,6 +5,7 @@ An application with a simple interface that allows Telegram messages from specif
 The application uses many libraries, but the only external ones are found below:
 
 Python Libraries:<br>
+Tkinter - https://pypi.org/project/tkinter-page/<br>
 Discord Webhook - https://pypi.org/project/discord-webhook/<br>
 Telethon - https://pypi.org/project/Telethon/<br>
 
